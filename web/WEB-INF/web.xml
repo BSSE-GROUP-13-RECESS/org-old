@@ -12,10 +12,6 @@
         <servlet-name>booking</servlet-name>
         <servlet-class>health.booking</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>database</servlet-name>
-        <servlet-class>health.database</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>health</servlet-name>
         <url-pattern>/health</url-pattern>
@@ -27,10 +23,6 @@
     <servlet-mapping>
         <servlet-name>booking</servlet-name>
         <url-pattern>/booking</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>database</servlet-name>
-        <url-pattern>/database</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
