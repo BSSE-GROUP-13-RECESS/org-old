@@ -2,15 +2,15 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>health</servlet-name>
-        <servlet-class>health.health</servlet-class>
+        <servlet-class>org.health.health</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>vaccine</servlet-name>
-        <servlet-class>health.vaccine</servlet-class>
+        <servlet-class>org.health.vaccine</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>booking</servlet-name>
-        <servlet-class>health.booking</servlet-class>
+        <servlet-class>org.health.booking</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>health</servlet-name>
