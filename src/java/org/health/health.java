@@ -25,7 +25,6 @@ public class health extends HttpServlet {
             }
             out.println(query.substring(0,query.length()-1)+";");
             request.setAttribute("data",query.substring(0,query.length()-1)+";");
-            request.getRequestDispatcher("").forward(request, response);
              
             
   

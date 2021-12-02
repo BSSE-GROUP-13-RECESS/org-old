@@ -1,9 +1,3 @@
-<%-- 
-    Document   : reg_health_center
-    Created on : Dec 2, 2021, 4:17:16 PM
-    Author     : Joshua
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
