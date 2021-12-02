@@ -55,7 +55,19 @@ public class TagHandler extends SimpleTagSupport {
             int colLength = resultSetMetaData.getColumnCount();
             String output;
             if(displayFormat.equals("list")){
-                output = "<ol>";
+                output = "<ul style='list-style-type: none;'>";
+                for(int i=1; i<=colLength; i++){
+                    output+="<li style='display: inline;'>"+resultSetMetaData.getColumnName(i)+"</li>";
+                }
+                output+="</ul>";
+
+                while (resultSet.next()){
+                    output = "<ul style='list-style-type: none;'>";
+                    for(int i=1; i<=colLength; i++){
+                        output+="<li style='display: inline;' class='"+resultSetMetaData.getColumnName(i)+"'>"+resultSet.getString(i)+"</li>";
+                    }
+                    output+="</ul>";
+                }
             }
             else{
                 output = "<table><thead><tr>";
@@ -67,7 +79,7 @@ public class TagHandler extends SimpleTagSupport {
                 while (resultSet.next()){
                     output+="<tr>";
                     for(int i=1; i<=colLength; i++){
-                        output+="<th>"+resultSet.getString(i)+"</th>";
+                        output+="<th class='"+resultSetMetaData.getColumnName(i)+"'>"+resultSet.getString(i)+"</th>";
                     }
                     output+="</tr>";
                 }

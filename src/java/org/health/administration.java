@@ -1,5 +1,6 @@
 package org.health;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,6 +38,37 @@ public class administration extends HttpServlet {
             session.setAttribute("email", email);
             session.setAttribute("password", password);
             session.setAttribute("reqType", reqType);
+            session.setAttribute("userType","patient");
+            response.sendRedirect(request.getContextPath() + "/home.jsp");
+        }
+        else{
+            HttpSession session = request.getSession();
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            String userType = "patient";
+            ServletContext context = getServletContext();
+            String[] names = context.getInitParameter("adminNames").split(",");
+            String[] emails = context.getInitParameter("adminEmails").split(",");
+            String[] passwords = context.getInitParameter("adminPasswords").split(",");
+
+            for (int i=0; i<emails.length; i++){
+                if(emails[i].equals(email)){
+                    if(passwords[i].equals(password)){
+                        userType="admin";
+                        session.setAttribute("name", names[i]);
+                    } else{
+                        request.setAttribute("email", email);
+                        request.setAttribute("error","Invalid password or email!");
+                        request.getRequestDispatcher("login.jsp").forward(request, response);
+                    }
+                    break;
+                }
+            }
+
+            session.setAttribute("email", email);
+            session.setAttribute("password", password);
+            session.setAttribute("reqType", reqType);
+            session.setAttribute("userType",userType);
             response.sendRedirect(request.getContextPath() + "/home.jsp");
         }
     }
