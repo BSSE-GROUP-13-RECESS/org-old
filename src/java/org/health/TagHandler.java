@@ -1,13 +1,15 @@
 package org.health;
 
 import jakarta.servlet.jsp.JspWriter;
+import jakarta.servlet.jsp.PageContext;
 import jakarta.servlet.jsp.tagext.SimpleTagSupport;
+
 import java.io.IOException;
 import java.sql.*;
 
 public class TagHandler extends SimpleTagSupport {
     //attributes
-    private String table = null, where = null, displayFormat = null, values = null, newValue = null;
+    private String table=null, where=null, displayFormat=null, values=null, newValue=null, redirectUrl=null;
 
     //setters
     public void setTable(String table){ this.table = table; }
@@ -15,13 +17,16 @@ public class TagHandler extends SimpleTagSupport {
     public void setDisplayFormat(String displayFormat){ this.displayFormat = displayFormat;}
     public void setValues(String values){ this.values = values;}
     public void setNewValue(String newValue){this.newValue=newValue;}
+    public void setRedirectUrl(String redirectUrl){this.redirectUrl=redirectUrl;}
 
     //dbConnection
     public Connection connection(){
         Connection connection = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/shop?useTimeZone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "O##e8ii4#?");
+            Class.forName("org.sqlite.JDBC");
+            String dbPath = ((PageContext) getJspContext()).getServletContext().getRealPath("/WEB-INF/web.xml");
+            dbPath = dbPath.substring(0,dbPath.indexOf("org"))+"org/database.sqlite";
+            connection =  DriverManager.getConnection("jdbc:sqlite:"+dbPath);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -33,11 +38,11 @@ public class TagHandler extends SimpleTagSupport {
         JspWriter out = getJspContext().getOut();
         try {
             Connection connection = connection();
-            int exec = connection.createStatement().executeUpdate("select * from "+table+((where==null)?"":" where "+where)+";");
-            out.println("<p style='color:"+((exec>0)?"green'>Operation successful":"red'>Operation failed!")+"</p>");
+            int exec = connection.createStatement().executeUpdate("insert into "+table+" "+values+";");
+            out.println(exec);
             connection.close();
         } catch (SQLException e) {
-            out.println("<p style='color:red'>"+e.getMessage()+"</p>");
+            out.println(-1);
         }
     }
 
@@ -89,6 +94,11 @@ public class TagHandler extends SimpleTagSupport {
         }
     }
 
+    //redirect
+    public void redirect() throws IOException{
+
+    }
+
     public void doTag() throws IOException {
         if(displayFormat!=null){
             select();
@@ -96,8 +106,10 @@ public class TagHandler extends SimpleTagSupport {
         else if(values!=null){
             insert();
         }
-        else{
+        else if(newValue!=null){
             update();
+        } else if(redirectUrl!=null){
+            redirect();
         }
     }
 }
