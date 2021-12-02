@@ -10,6 +10,5 @@
 </h1>
 <br/>
 <a href="booking">Hello Servlet</a>
-<try:select table="user" displayFormat="table"/>
 </body>
 </html>

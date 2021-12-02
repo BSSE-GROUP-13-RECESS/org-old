@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <welcome-file-list>
+        <welcome-file>reg_health_center.jsp</welcome-file>
+    </welcome-file-list>
     <servlet>
         <servlet-name>administration</servlet-name>
         <servlet-class>org.health.administration</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>vac_administration</servlet-name>
+        <servlet-class>org.health.vac_administration</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>administration</servlet-name>
         <url-pattern>/administration</url-pattern>
     </servlet-mapping>
-
     <servlet>
         <servlet-name>vaccine</servlet-name>
         <servlet-class>org.health.vaccine</servlet-class>
@@ -24,6 +30,18 @@
     <servlet-mapping>
         <servlet-name>booking</servlet-name>
         <url-pattern>/booking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>vac_administration</servlet-name>
+        <url-pattern>/vac_administration</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>health</servlet-name>
+        <servlet-class>org.health.health</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>health</servlet-name>
+        <url-pattern>/health</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
