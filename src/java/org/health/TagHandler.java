@@ -9,7 +9,7 @@ import java.sql.*;
 
 public class TagHandler extends SimpleTagSupport {
     //attributes
-    private String table=null, where=null, displayFormat=null, values=null, newValue=null, redirectUrl=null;
+    private String table=null, where=null, displayFormat=null, values=null, newValue=null;
 
     //setters
     public void setTable(String table){ this.table = table; }
@@ -17,7 +17,6 @@ public class TagHandler extends SimpleTagSupport {
     public void setDisplayFormat(String displayFormat){ this.displayFormat = displayFormat;}
     public void setValues(String values){ this.values = values;}
     public void setNewValue(String newValue){this.newValue=newValue;}
-    public void setRedirectUrl(String redirectUrl){this.redirectUrl=redirectUrl;}
 
     //dbConnection
     public Connection connection(){
@@ -87,16 +86,11 @@ public class TagHandler extends SimpleTagSupport {
         try {
             Connection connection = connection();
             int exec = connection.createStatement().executeUpdate("select * from "+table+((where==null)?"":" where "+where)+";");
-            out.println("<p style='color:"+((exec>0)?"green'>Operation successful":"red'>Operation failed!")+"</p>");
+            out.println(exec);
             connection.close();
         } catch (SQLException e) {
-            out.println("<p style='color:red'>"+e.getMessage()+"</p>");
+            out.println(-1);
         }
-    }
-
-    //redirect
-    public void redirect() throws IOException{
-
     }
 
     public void doTag() throws IOException {
@@ -106,10 +100,8 @@ public class TagHandler extends SimpleTagSupport {
         else if(values!=null){
             insert();
         }
-        else if(newValue!=null){
+        else{
             update();
-        } else if(redirectUrl!=null){
-            redirect();
         }
     }
 }

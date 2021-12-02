@@ -13,6 +13,9 @@
                 <administration:insert table="patient" values="(name,email,password) values ('${sessionScope.name}','${sessionScope.email}','${sessionScope.password}')"/>
                 <c:set var="reqType" scope="session" value="login"/>
             </c:if>
+            <c:if test="${sessionScope.reqType.equals('login')}">
+                <administration:select table="" displayFormat=""/>
+            </c:if>
         </p>
         <h1>Hello World home jsp!</h1>
     </body>
