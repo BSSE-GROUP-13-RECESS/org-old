@@ -13,6 +13,13 @@
     <link rel="stylesheet" href="public/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="public/dist/css/adminlte.min.css">
+    <style>
+        .form-control-custom{
+            display: inline;
+            width: auto;
+            margin-right: 5px;
+        }
+    </style>
     <title>Home</title>
   </head>
   <body>
