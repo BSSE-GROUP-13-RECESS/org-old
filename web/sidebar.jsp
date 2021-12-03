@@ -48,6 +48,20 @@
         </li>
         
         <li class="nav-item">
+          <a href="./register_vaccines.jsp" class="nav-link">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>Register Vaccines</p>
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a href="./vaccines_received.jsp" class="nav-link">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>Received Doses</p>
+          </a>
+        </li>
+        
+        <li class="nav-item">
           <a href="./login.jsp" class="nav-link">
             <i class="far fa-circle nav-icon"></i>
             <p>Log out</p>
