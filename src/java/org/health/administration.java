@@ -41,7 +41,7 @@ public class administration extends HttpServlet {
             session.setAttribute("userType","patient");
             response.sendRedirect(request.getContextPath() + "/home.jsp");
         }
-        else{
+        else if(reqType.equals("login")){
             HttpSession session = request.getSession();
             String email = request.getParameter("email");
             String password = request.getParameter("password");
@@ -71,5 +71,6 @@ public class administration extends HttpServlet {
             session.setAttribute("userType",userType);
             response.sendRedirect(request.getContextPath() + "/home.jsp");
         }
+
     }
 }
