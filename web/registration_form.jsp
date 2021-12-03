@@ -25,7 +25,7 @@
             <h1 class="text-3xl font-bold text-cyan-500">Sign Up</h1>
             <h3 class="text-1xl font-semibold text-gray-500">Create account!</h3>
             <div class="text-left pt-3">
-              <input type="hidden" id="action" name="reqType" value="register" hidden>
+              <input type="hidden" id="action" name="auth" value="register" hidden>
               <p style="color:red">${requestScope.error}</p>
               <input type="text" name="name" placeholder="Name" value="${requestScope.name}" class="p-1 rounded-lg bg-gray-100 shadow-md focus:outline-none focus:border-2 border-cyan-500" />
               <input type="email" name="email" placeholder="Email" value="${requestScope.email}" class="block p-1 mt-3 rounded-lg bg-gray-100 shadow-md focus:outline-none focus:border-2 border-cyan-500" />

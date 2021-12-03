@@ -16,7 +16,7 @@
       </div>
       <div class="info">
         <a id="navbarDropdown" class="d-block" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          ${sessionScope.name}
+          ${sessionScope.username}
         </a>
       </div>
     </div>

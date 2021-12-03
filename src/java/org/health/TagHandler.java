@@ -24,7 +24,7 @@ public class TagHandler extends SimpleTagSupport {
         Connection connection = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            String dbPath = ((PageContext) getJspContext()).getServletContext().getRealPath("/WEB-INF/web.xml");
+            String dbPath = ((PageContext) getJspContext()).getServletContext().getRealPath("/");
             dbPath = dbPath.substring(0,dbPath.indexOf("org"))+"org/database.sqlite";
             connection =  DriverManager.getConnection("jdbc:sqlite:"+dbPath);
         } catch (ClassNotFoundException | SQLException e) {

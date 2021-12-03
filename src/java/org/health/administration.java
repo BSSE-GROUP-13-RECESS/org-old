@@ -18,8 +18,8 @@ public class administration extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        String reqType = request.getParameter("reqType");
-        if(reqType.equals("register")) {
+        String auth = request.getParameter("auth");
+        if(auth.equals("register")) {
             String name = request.getParameter("name");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
@@ -34,14 +34,14 @@ public class administration extends HttpServlet {
             }
             HttpSession session = request.getSession();
 
-            session.setAttribute("name", name);
+            session.setAttribute("username", name);
             session.setAttribute("email", email);
             session.setAttribute("password", password);
-            session.setAttribute("reqType", reqType);
+            session.setAttribute("auth", auth);
             session.setAttribute("userType","patient");
             response.sendRedirect(request.getContextPath() + "/home.jsp");
         }
-        else if(reqType.equals("login")){
+        else if(auth.equals("login")){
             HttpSession session = request.getSession();
             String email = request.getParameter("email");
             String password = request.getParameter("password");
@@ -55,7 +55,7 @@ public class administration extends HttpServlet {
                 if(emails[i].equals(email)){
                     if(passwords[i].equals(password)){
                         userType="admin";
-                        session.setAttribute("name", names[i]);
+                        session.setAttribute("username", names[i]);
                     } else{
                         request.setAttribute("email", email);
                         request.setAttribute("error","Invalid password or email!");
@@ -67,7 +67,7 @@ public class administration extends HttpServlet {
 
             session.setAttribute("email", email);
             session.setAttribute("password", password);
-            session.setAttribute("reqType", reqType);
+            session.setAttribute("auth", auth);
             session.setAttribute("userType",userType);
             response.sendRedirect(request.getContextPath() + "/home.jsp");
         }
