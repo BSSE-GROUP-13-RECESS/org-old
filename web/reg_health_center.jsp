@@ -14,6 +14,9 @@
                             <c:if test="${sessionScope.data.length()>0}">
                               <reg:insert table="health_centre" values="${sessionScope.data}"/>
                               <c:set var="data" scope="session" value=""/>
+                              <c:if test="${requestScope.insertResp>0}">
+                                Saved ${requestScope.insertResp} records.
+                              </c:if>
                             </c:if>
                           </p>
                         </div>

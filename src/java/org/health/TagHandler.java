@@ -36,13 +36,14 @@ public class TagHandler extends SimpleTagSupport {
     //insert
     public void insert() throws IOException {
         JspWriter out = getJspContext().getOut();
+        HttpServletRequest request = (HttpServletRequest) ((PageContext)getJspContext()).getRequest();
         try {
             Connection connection = connection();
             int exec = connection.createStatement().executeUpdate("insert into "+table+" "+values+";");
-            out.println(exec);
+            request.setAttribute("insertResp",exec);
             connection.close();
         } catch (SQLException e) {
-            out.println(-1);
+            request.setAttribute("insertResp",-1);
         }
     }
 
