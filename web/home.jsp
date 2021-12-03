@@ -1,6 +1,5 @@
 <%@ include file="upper.jsp" %>
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
   <%@ taglib prefix="administration" uri="https://org.com" %>
   <div hidden>
     <c:choose>
@@ -511,5 +510,4 @@
     </div><!-- /.container-fluid -->
   </section>
   <!-- /.content -->
-</div>
 <%@ include file="lower.jsp" %>
