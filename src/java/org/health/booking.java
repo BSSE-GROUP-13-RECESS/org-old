@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  *
@@ -23,16 +22,16 @@ public class booking extends HttpServlet {
         String dbPath = getServletContext().getRealPath("/WEB-INF/web.xml");
 
         String message = "<p>No data fetched</p>";
-        try {
-            resultSet = database.executeQuery("select * from user;",dbPath);
-            message = "<ol>";
-            while (resultSet.next()){
-                message+="<li>"+resultSet.getString("name")+"</li>";
-            }
-            message+="</ol>";
-        } catch (SQLException | ClassNotFoundException e) {
-            message = "<p style='color: red'>"+e.getMessage()+"</p>";
-        }
+//        try {
+//            resultSet = database.executeQuery("select * from user;",dbPath);
+//            message = "<ol>";
+//            while (resultSet.next()){
+//                message+="<li>"+resultSet.getString("name")+"</li>";
+//            }
+//            message+="</ol>";
+//        } catch (SQLException | ClassNotFoundException e) {
+//            message = "<p style='color: red'>"+e.getMessage()+"</p>";
+//        }
 
         PrintWriter out = response.getWriter();
         out.println("<!DOCTYPE html>");

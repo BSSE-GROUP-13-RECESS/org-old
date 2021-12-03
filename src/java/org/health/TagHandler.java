@@ -1,5 +1,6 @@
 package org.health;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.jsp.JspWriter;
 import jakarta.servlet.jsp.PageContext;
 import jakarta.servlet.jsp.tagext.SimpleTagSupport;
@@ -48,6 +49,7 @@ public class TagHandler extends SimpleTagSupport {
     //select
     public void select() throws IOException {
         JspWriter out = getJspContext().getOut();
+        HttpServletRequest request = (HttpServletRequest) ((PageContext)getJspContext()).getRequest();
         try {
             Connection connection = connection();
             ResultSet resultSet = connection.createStatement().executeQuery("select * from "+table+((where==null)?"":" where "+where)+";");
@@ -86,6 +88,7 @@ public class TagHandler extends SimpleTagSupport {
                 output+="</tbody></table>";
             }
             out.println(output);
+            request.setAttribute("data",resultSet);
             connection.close();
         } catch (SQLException e) {
             out.println("<p style='color:red'>"+e.getMessage()+"</p>");
