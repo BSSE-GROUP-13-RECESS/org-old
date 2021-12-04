@@ -14,7 +14,7 @@ public class health extends HttpServlet {
         String[] health_centers = request.getParameterValues("name");
         String[] center_id = request.getParameterValues("center_id");
         String query = "(name,center_id) values ";
-        for(int i=0;i<5;i++){
+        for(int i=0;i<health_centers.length;i++){
            if(health_centers[i].length()!=0){
           query+="('"+health_centers[i]+"','"+center_id[i]+"'),";
            }

@@ -29,6 +29,7 @@ public class administration extends HttpServlet {
                 request.setAttribute("name", name);
                 request.setAttribute("email", email);
                 request.setAttribute("error","passwords do not match!");
+
                 request.getRequestDispatcher("registration_form.jsp").forward(request, response);
                 return;
             }
@@ -70,6 +71,11 @@ public class administration extends HttpServlet {
             session.setAttribute("auth", auth);
             session.setAttribute("userType",userType);
             response.sendRedirect(request.getContextPath() + "/home.jsp");
+        }
+        else if(auth.equals("logout")){
+            HttpSession session = request.getSession();
+            session.invalidate();
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
         }
 
     }

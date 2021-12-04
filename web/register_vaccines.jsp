@@ -1,19 +1,21 @@
-<%-- 
-    Document   : register_vaccines
-    Created on : Dec 3, 2021, 5:23:30 PM
-    Author     : hp
---%>
-
 <%@ include file="upper.jsp" %>
+<%@taglib uri="https://org.com" prefix="vaccine"%>
   <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card mt-5">
                 <div class="card-header"><h2>Register Vaccine</h2></div>
-
                   <div class="card-body">
-
-                    <form action="health" method="post">
+                    <c:if test="${sessionScope.vaccines.length()>0}">
+                      <vaccine:insert table="vaccine" values="${sessionScope.vaccines}"/>
+                      <c:set var="vaccines" scope="session" value=""/>
+                      <c:if test="${requestScope.insertResp>0}">
+                        Saved ${requestScope.insertResp} records.
+                      </c:if>
+                    </c:if>
+                    <vaccine:select table="vaccine" displayFormat="table"/>
+                    <form action="vaccine" method="post">
+                      <input type="hidden" name="reqType" value="regVaccine"/>
                         <table class="table table-bordered table-hover">
                             <thead>
                               <tr>

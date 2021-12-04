@@ -30,9 +30,9 @@ public class vaccine extends HttpServlet {
             String[] names = request.getParameterValues("name");
             String[] shots = request.getParameterValues("shots");
             String[] days = request.getParameterValues("days");
-        String query = "(name,required_shots,next_doze_time) avalues ";
+            String query = "(name,required_shots,next_doze_time) values ";
 
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < names.length; i++) {
                 if (names[i].length()>0&&shots[i].length()>0&&days[i].length()>0) {
                     query += "('" + names[i] + "','" + shots[i] + "','" + days[i] + "'),";
                 }
@@ -40,8 +40,8 @@ public class vaccine extends HttpServlet {
 
             HttpSession session = request.getSession();
             session.setAttribute("reqType",reqType);
-            session.setAttribute("data", query.substring(0, query.length() - 1) + ";");
-            response.sendRedirect(request.getContextPath() + "/vaccine.jsp");
+            session.setAttribute("vaccines", query.substring(0, query.length() - 1) + ";");
+            response.sendRedirect(request.getContextPath() + "/register_vaccines.jsp");
         }
         else if(reqType.equals("regReceivedVaccine")){
             String[] vaccines = request.getParameterValues("vaccine");
@@ -50,7 +50,7 @@ public class vaccine extends HttpServlet {
             String[] date = request.getParameterValues("date");
             String query = "(vaccine_id,quantity,batch_number,arrival_date) values ";
 
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < vaccines.length; i++) {
                 if (vaccines[i].length()>0&&quantity[i].length()>0&&batchNo[i].length()>0&&date[i].length()>0) {
                     query += "('" + vaccines[i] + "','" + quantity[i] + "','" + batchNo[i] + "','" + date[i] + "'),";
                 }
@@ -58,8 +58,8 @@ public class vaccine extends HttpServlet {
 
             HttpSession session = request.getSession();
             session.setAttribute("reqType",reqType);
-            session.setAttribute("data", query.substring(0, query.length() - 1) + ";");
-            response.sendRedirect(request.getContextPath() + "/vaccine.jsp");
+            session.setAttribute("dozes", query.substring(0, query.length() - 1) + ";");
+            response.sendRedirect(request.getContextPath() + "/vaccines_received.jsp");
         }
     }
 }

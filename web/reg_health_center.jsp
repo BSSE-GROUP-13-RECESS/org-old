@@ -7,7 +7,7 @@
                 <div class="card-header"><h2>Register Health Center</h2></div>
 
                 <div class="card-body">
-
+                  <reg:select table="health_centre" displayFormat="table"/>
                     <form action="health" method="post">
                         <div class="form-group row">
                           <p class="bg-success text-danger">

@@ -15,9 +15,14 @@
         <img src="public/dist/img/user.svg" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a id="navbarDropdown" class="d-block" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          ${sessionScope.username}
-        </a>
+        <span class="d-block" style="color: white">${sessionScope.username}</span>
+        <span class="d-block" style="color: white">${sessionScope.email}</span>
+        <form method="POST" action="administration" class="d-block">
+          <input type="hidden" name="auth" value="logout"/>
+          <a href="administration" onclick="event.preventDefault(); this.closest('form').submit();">
+            <i class="fa fa-sign-out"></i>Log out
+          </a>
+        </form>
       </div>
     </div>
 
@@ -27,7 +32,7 @@
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
         <li class="nav-item">
-          <a href="./home.jsp" class="nav-link active">
+          <a href="./home.jsp" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>Dashboard</p>
           </a>
@@ -58,13 +63,6 @@
           <a href="./vaccines_received.jsp" class="nav-link">
             <i class="nav-icon fas fa-edit"></i>
             <p>Received Doses</p>
-          </a>
-        </li>
-        
-        <li class="nav-item">
-          <a href="./login.jsp" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Log out</p>
           </a>
         </li>
 

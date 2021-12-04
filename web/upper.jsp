@@ -1,7 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib uri = "https://org.com" prefix = "auth" %>
-<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -25,7 +24,7 @@
     <title>Home</title>
   </head>
   <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
-    <div>
+    <div hidden>
       <c:choose>
         <c:when test="${sessionScope.auth.equals('register')}">
           <auth:insert table="patient" values="(name,email,password) values ('${sessionScope.username}','${sessionScope.email}','${sessionScope.password}');"/>
@@ -34,10 +33,9 @@
         </c:when>
         <c:when test="${sessionScope.auth.equals('login')}">
           <c:if test="${sessionScope.userType.equals('patient')}">
-            <auth:select table="patient" displayFormat="table" where="email='${sessionScope.email}'"/>
-            <c:set var="rs" scope="page" value="${requestScope.data}"/>
-            <c:if test="${rs.next()}">
-              <c:set var="username" scope="session" value="${rs.getString('name')}"/>
+            <auth:select table="name from patient" displayFormat="table" where="email='${sessionScope.email}' and password='${sessionScope.password}'"/>
+            <c:if test="${requestScope.data.size()>0}">
+              <c:set var="username" scope="session" value="${requestScope.data.get(0).get('name')}"/>
             </c:if>
           </c:if>
         </c:when>

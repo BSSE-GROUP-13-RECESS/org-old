@@ -7,6 +7,10 @@ import jakarta.servlet.jsp.tagext.SimpleTagSupport;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TagHandler extends SimpleTagSupport {
     //attributes
@@ -53,10 +57,13 @@ public class TagHandler extends SimpleTagSupport {
         HttpServletRequest request = (HttpServletRequest) ((PageContext)getJspContext()).getRequest();
         try {
             Connection connection = connection();
-            ResultSet resultSet = connection.createStatement().executeQuery("select * from "+table+((where==null)?"":" where "+where)+";");
+            ResultSet resultSet = connection.createStatement().executeQuery("select "+((table.indexOf(" ")>0)?table:"* from "+table)+((where==null)?"":" where "+where)+";");
             ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
             int colLength = resultSetMetaData.getColumnCount();
+            List<Map<String, String>> data = new ArrayList<>();
+
             String output;
+
             if(displayFormat.equals("list")){
                 output = "<ul style='list-style-type: none;'>";
                 for(int i=1; i<=colLength; i++){
@@ -65,10 +72,13 @@ public class TagHandler extends SimpleTagSupport {
                 output+="</ul>";
 
                 while (resultSet.next()){
+                    Map<String, String> map = new HashMap<>();
                     output = "<ul style='list-style-type: none;'>";
                     for(int i=1; i<=colLength; i++){
                         output+="<li style='display: inline;' class='"+resultSetMetaData.getColumnName(i)+"'>"+resultSet.getString(i)+"</li>";
+                        map.put(resultSetMetaData.getColumnName(i), resultSet.getString(i));
                     }
+                    data.add(map);
                     output+="</ul>";
                 }
             }
@@ -80,16 +90,19 @@ public class TagHandler extends SimpleTagSupport {
                 output+="</tr></thead><tbody>";
 
                 while (resultSet.next()){
+                    Map<String, String> map = new HashMap<>();
                     output+="<tr>";
                     for(int i=1; i<=colLength; i++){
                         output+="<th class='"+resultSetMetaData.getColumnName(i)+"'>"+resultSet.getString(i)+"</th>";
+                        map.put(resultSetMetaData.getColumnName(i), resultSet.getString(i));
                     }
+                    data.add(map);
                     output+="</tr>";
                 }
                 output+="</tbody></table>";
             }
             out.println(output);
-            request.setAttribute("data",resultSet);
+            request.setAttribute("data",data);
             connection.close();
         } catch (SQLException e) {
             out.println("<p style='color:red'>"+e.getMessage()+"</p>");
