@@ -1,10 +1,5 @@
-<%-- 
-    Document   : booking
-    Created on : Dec 3, 2021, 10:10:36 AM
-    Author     : hp
---%>
 <%@ include file="upper.jsp" %>
-    <!-- Content Header (Page header) -->
+  <c:if test="${sessionScope.userType.equals('patient')}">
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -118,4 +113,5 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </section><!-- /.content -->
+  </c:if>
 <%@ include file="lower.jsp" %>
