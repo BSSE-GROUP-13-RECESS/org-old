@@ -37,9 +37,10 @@
         </c:when>
         <c:when test="${sessionScope.auth.equals('login')}">
           <c:if test="${sessionScope.userType.equals('patient')}">
-            <auth:select table="name from patient" displayFormat="table" where="email='${sessionScope.email}' and password='${sessionScope.password}'"/>
+            <auth:select table="id, name from patient" displayFormat="table" where="email='${sessionScope.email}' and password='${sessionScope.password}'"/>
             <c:if test="${requestScope.data.size()>0}">
               <c:set var="username" scope="session" value="${requestScope.data.get(0).get('name')}"/>
+              <c:set var="patientId" scope="session" value="${requestScope.data.get(0).get('id')}"/>
             </c:if>
           </c:if>
         </c:when>

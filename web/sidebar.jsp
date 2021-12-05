@@ -67,6 +67,15 @@
           </li>
         </c:if>
 
+        <c:if test="${sessionScope.userType.equals('centreAdmin')}">
+          <li class="nav-item">
+            <a href="./vaccinated_patients.jsp" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>Vaccinated patients</p>
+            </a>
+          </li>
+        </c:if>
+
         <li class="nav-item">
           <a href="./email.jsp" class="nav-link">
             <i class="nav-icon fas fa-edit"></i>

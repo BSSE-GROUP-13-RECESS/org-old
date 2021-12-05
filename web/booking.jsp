@@ -1,4 +1,5 @@
 <%@ include file="upper.jsp" %>
+<%@taglib uri="https://org.com" prefix="booking"%>
   <c:if test="${sessionScope.userType.equals('patient')}">
     <section class="content-header">
       <div class="container-fluid">
@@ -72,35 +73,46 @@
                   <h3>Place Booking</h3>
               </div><!-- /.card-header -->
               <div class="card-body">
-                <form action="health" method="post">  
-                    <table class="table table-bordered table-hover">
-                      <thead>
-                        <tr>
-                          <th>Health Center</th>
-                          <th>Date</th>
-                          <th>Time</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                            <td>
-                              <select class="form-control">
-                                <option>option 1</option>
-                                <option>option 2</option>
-                                <option>option 3</option>
-                                <option>option 4</option>
-                                <option>option 5</option>
-                              </select>
-                            </td>
-                          <td>
-                              <input type="date" name="date" required><!-- datepicker -->
-                          </td>
-                          <td>
-                              <input type="time" name="time" required><!-- timepicker -->
-                          </td> 
-                        </tr>
-                      </tbody>        
-                    </table>
+                <booking:select table="booking" displayFormat="table" where="patient_id=${sessionScope.patientId}"/>
+                <div hidden>
+                  <c:if test="${sessionScope.bookQuery.length()>0}">
+                    <booking:insert table="booking" values="${sessionScope.bookQuery}"/>
+                    <c:set scope="page" var="bookInt" value="${requestScope.insertResp}"/>
+                    <c:set scope="session" var="bookQuery" value=""/>
+                  </c:if>
+                  <booking:select table="health_centre" displayFormat="table"/>
+                  <c:if test="${requestScope.data.size()>0}">
+                    <c:set var="options" scope="page" value=""/>
+                    <c:forEach var="i" begin="0" end="${requestScope.data.size()-1}" step="1">
+                      <c:set var="options" scope="page" value="${pageScope.options}<option value='${requestScope.data.get(i).get('id')}'>${requestScope.data.get(i).get('name')}</option>"/>
+                    </c:forEach>
+                  </c:if>
+                </div>
+                <p class="bg-success text-danger"><c:if test="${pageScope.bookInt>0}"><c:out value="Booking successfully made."/></c:if></p>
+                <form action="booking" method="post">
+                  <input type="hidden" name="reqType" value="book">
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Health Center</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <select class="form-control" name="centre"><c:out value="${pageScope.options}" escapeXml="false"/></select>
+                        </td>
+                        <td>
+                            <input type="date" name="date" required><!-- datepicker -->
+                        </td>
+                        <td>
+                            <input type="time" name="time" required><!-- timepicker -->
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 <div class="form-group row mb-0">
                   <div class="col-md-6 offset-md-4">
                       <button type="submit" class="btn btn-primary">Book</button>

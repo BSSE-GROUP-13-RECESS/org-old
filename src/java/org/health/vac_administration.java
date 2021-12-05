@@ -12,13 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class vac_administration extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
 
-    }
-    
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String vaccine_id = request.getParameter("vaccine_id");
         String patient_id = request.getParameter("patient_id");
@@ -29,10 +23,4 @@ public class vac_administration extends HttpServlet {
         String date = request.getParameter("date");
 
     }
-    
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

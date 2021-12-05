@@ -4,46 +4,23 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.ResultSet;
 
-/**
- *
- * @author Joshua
- */
 public class booking extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        ResultSet resultSet;
 
-        //use this to get path of sqlite in any servlet and pass it in the different methods
-        String dbPath = getServletContext().getRealPath("/WEB-INF/web.xml");
-
-        String message = "<p>No data fetched</p>";
-//        try {
-//            resultSet = database.executeQuery("select * from user;",dbPath);
-//            message = "<ol>";
-//            while (resultSet.next()){
-//                message+="<li>"+resultSet.getString("name")+"</li>";
-//            }
-//            message+="</ol>";
-//        } catch (SQLException | ClassNotFoundException e) {
-//            message = "<p style='color: red'>"+e.getMessage()+"</p>";
-//        }
-
-        PrintWriter out = response.getWriter();
-        out.println("<!DOCTYPE html>");
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<title>Servlet booking</title>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<h1>Servlet booking at " + request.getContextPath() + "</h1>");
-        out.println("Guys database connection works!!! Use database.sqlite in the root directory as our database");
-        out.println(message);
-        out.println("</body>");
-        out.println("</html>");
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String reqType = request.getParameter("reqType");
+        if(reqType.equals("book")){
+            HttpSession session = request.getSession();
+            String centre = request.getParameter("centre");
+            String date = request.getParameter("date");
+            String time = request.getParameter("time");
+            String id = (String) session.getAttribute("patientId");
+            session.setAttribute("bookQuery"," (centre_id,patient_id,date,time) values ('"+centre+"','"+id+"','"+date+"','"+time+"');");
+            response.sendRedirect(request.getContextPath() + "/booking.jsp");
+        }
     }
 }
