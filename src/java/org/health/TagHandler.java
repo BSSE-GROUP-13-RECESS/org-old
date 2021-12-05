@@ -43,7 +43,7 @@ public class TagHandler extends SimpleTagSupport {
         HttpServletRequest request = (HttpServletRequest) ((PageContext)getJspContext()).getRequest();
         try {
             Connection connection = connection();
-            int exec = connection.createStatement().executeUpdate("insert into "+table+" "+values+";");
+            int exec = connection.createStatement().executeUpdate("insert into "+table+" "+values);
             request.setAttribute("insertResp",exec);
             connection.close();
         } catch (SQLException e) {

@@ -1,6 +1,7 @@
 <%@ include file="upper.jsp" %>
-<!-- Content Wrapper. Contains page content -->
-  <!-- Content Header (Page header) -->
+<c:if test="${sessionScope.userType.equals('patient')}">
+  <% response.sendRedirect(request.getContextPath() + "/booking.jsp");%>
+</c:if>
   <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">

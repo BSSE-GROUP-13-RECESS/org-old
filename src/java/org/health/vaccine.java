@@ -61,5 +61,10 @@ public class vaccine extends HttpServlet {
             session.setAttribute("dozes", query.substring(0, query.length() - 1) + ";");
             response.sendRedirect(request.getContextPath() + "/vaccines_received.jsp");
         }
+        else if(reqType.equals("distribute")){
+            HttpSession session = request.getSession();
+            session.setAttribute("reqType",reqType);
+            response.sendRedirect(request.getContextPath() + "/vaccines_received.jsp");
+        }
     }
 }
