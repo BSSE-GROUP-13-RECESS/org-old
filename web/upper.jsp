@@ -21,6 +21,9 @@
             width: auto;
             margin-right: 5px;
         }
+        thead{
+            border-top: 1px solid #dee2e6;
+        }
     </style>
     <title>Home</title>
   </head>
@@ -42,7 +45,10 @@
         </c:when>
       </c:choose>
       <c:if test="${sessionScope.auth.length()==0||sessionScope.auth==null||sessionScope.username.length()==0||sessionScope.username==null}">
-        <% response.sendRedirect(request.getContextPath() + "/login.jsp"); %>
+        <%
+          request.setAttribute("error","Invalid password or email!");
+          request.getRequestDispatcher("login.jsp").forward(request, response);
+        %>
       </c:if>
     </div>
     <div class="wrapper">

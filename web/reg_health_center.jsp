@@ -5,8 +5,7 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card mt-5">
-          <div class="card-header"><h2>Register Health Center</h2></div>
-
+          <div class="card-header"><h2>Health Centers</h2></div>
           <div class="card-body">
             <reg:select table="health_centre" displayFormat="table"/>
             <form action="health" method="post">
@@ -21,48 +20,37 @@
                   </c:if>
                 </p>
               </div>
-              <div class="form-group row">
-                <label class="col-md-4 col-form-label text-md-right">Health Center 1</label>
-                <div>
-                  <input type="text" name="name" placeholder="name" value="" class="form-control form-control-custom" />
-                  <input type="text" name="center_id" placeholder="center_id" value="" class="form-control form-control-custom" />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-md-4 col-form-label text-md-right">Health Center 2</label>
-                <div>
-                  <input type="text" name="name" placeholder="name" value="" class="form-control form-control-custom" />
-                  <input type="text" name="center_id" placeholder="center_id" value="" class="form-control form-control-custom" />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-md-4 col-form-label text-md-right">Health Center 3</label>
-                <div>
-                  <input type="text" name="name" placeholder="name" value="" class="form-control form-control-custom" />
-                  <input type="text" name="center_id" placeholder="center_id" value="" class="form-control form-control-custom" />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-md-4 col-form-label text-md-right">Health Center 4</label>
-                <div>
-                  <input type="text" name="name" placeholder="name" value="" class="form-control form-control-custom" />
-                  <input type="text" name="center_id" placeholder="center_id" value="" class="form-control form-control-custom" />
-                </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-md-4 col-form-label text-md-right">Health Center 5</label>
-                <div>
-                  <input type="text" name="name" placeholder="name" value="" class="form-control form-control-custom" />
-                  <input type="text" name="center_id" placeholder="center_id" value="" class="form-control form-control-custom" />
-                </div>
-              </div>
-
+              <table class="table table-bordered table-hover">
+                <tbody>
+                  <tr>
+                    <td>Health Center 1</td>
+                    <td><input type="text" name="name" placeholder="name" value="" class="form-control form-control-custom" /></td>
+                    <td><input type="text" name="center_id" placeholder="center_id" value="" class="form-control form-control-custom" /></td>
+                  </tr>
+                  <tr>
+                    <td>Health Center 2</td>
+                    <td><input type="text" name="name" placeholder="name" value="" class="form-control form-control-custom" /></td>
+                    <td><input type="text" name="center_id" placeholder="center_id" value="" class="form-control form-control-custom" /></td>
+                  </tr>
+                  <tr>
+                    <td>Health Center 3</td>
+                    <td><input type="text" name="name" placeholder="name" value="" class="form-control form-control-custom" /></td>
+                    <td><input type="text" name="center_id" placeholder="center_id" value="" class="form-control form-control-custom" /></td>
+                  </tr>
+                  <tr>
+                    <td>Health Center 4</td>
+                    <td><input type="text" name="name" placeholder="name" value="" class="form-control form-control-custom" /></td>
+                    <td><input type="text" name="center_id" placeholder="center_id" value="" class="form-control form-control-custom" /></td>
+                  </tr>
+                  <tr>
+                    <td>Health Center 5</td>
+                    <td><input type="text" name="name" placeholder="name" value="" class="form-control form-control-custom" /></td>
+                    <td><input type="text" name="center_id" placeholder="center_id" value="" class="form-control form-control-custom" /></td>
+                  </tr>
+                </tbody>
+              </table>
               <div class="form-group row mb-0">
-                <div class="col-md-6 offset-md-4">
+                <div class="col-md-6">
                   <button type="submit" class="btn btn-primary">Add</button>
                 </div>
               </div>

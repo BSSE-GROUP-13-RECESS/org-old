@@ -40,21 +40,21 @@
           <li class="nav-item">
             <a href="./reg_health_center.jsp" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
-              <p>Health Center Registration</p>
+              <p>Health Centers</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="./register_vaccines.jsp" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
-              <p>Register Vaccines</p>
+              <p>Vaccines</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="./vaccines_received.jsp" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
-              <p>Received Doses</p>
+              <p>Doses</p>
             </a>
           </li>
         </c:if>

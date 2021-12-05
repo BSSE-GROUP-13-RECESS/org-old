@@ -83,7 +83,7 @@ public class TagHandler extends SimpleTagSupport {
                 }
             }
             else{
-                output = "<table><thead><tr>";
+                output = "<table class='table table-bordered table-hover table-responsive' style='border-right:0; border-bottom:0; border-top:0;'><thead><tr>";
                 for(int i=1; i<=colLength; i++){
                     output+="<th>"+resultSetMetaData.getColumnName(i)+"</th>";
                 }
@@ -99,7 +99,7 @@ public class TagHandler extends SimpleTagSupport {
                     data.add(map);
                     output+="</tr>";
                 }
-                output+="</tbody></table>";
+                output+="</tbody></table><br/>";
             }
             out.println(output);
             request.setAttribute("data",data);
@@ -114,11 +114,11 @@ public class TagHandler extends SimpleTagSupport {
         JspWriter out = getJspContext().getOut();
         try {
             Connection connection = connection();
-            int exec = connection.createStatement().executeUpdate("select * from "+table+((where==null)?"":" where "+where)+";");
+            int exec = connection.createStatement().executeUpdate("update "+table+" set "+newValue+" where "+where+" ;");
             out.println(exec);
             connection.close();
         } catch (SQLException e) {
-            out.println(-1);
+            out.println(e.getMessage());
         }
     }
 
