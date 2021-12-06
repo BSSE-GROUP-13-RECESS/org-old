@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card mt-5">
-          <div class="card-header"><h2>Vaccines</h2></div>
+          <div class="card-header"><h2>Register Vaccines</h2></div>
           <div class="card-body">
             <c:if test="${sessionScope.vaccines.length()>0}">
               <vaccine:insert table="vaccine" values="${sessionScope.vaccines}"/>
@@ -14,7 +14,6 @@
                 Saved ${requestScope.insertResp} records.
               </c:if>
             </c:if>
-            <vaccine:select table="vaccine" displayFormat="table"/>
             <form action="vaccine" method="post">
               <input type="hidden" name="reqType" value="regVaccine"/>
               <table class="table table-bordered table-hover">

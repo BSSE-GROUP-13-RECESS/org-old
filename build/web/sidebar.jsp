@@ -54,14 +54,21 @@
           <li class="nav-item">
             <a href="./register_vaccines.jsp" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
-              <p>Vaccines</p>
+              <p>Register Vaccines</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a href="./vaccines_received.jsp" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
-              <p>Doses</p>
+              <p>Register Received Doses</p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="./distribution.jsp" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>Available Doses</p>
             </a>
           </li>
         </c:if>
@@ -77,13 +84,13 @@
         <c:if test="${sessionScope.userType.equals('centreAdmin')}">
           <li class="nav-item">
             <a href="./vaccinated_patients.jsp" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-table"></i>
               <p>Vaccinated patients</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="./centre_report.jsp" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>Reports</p>
             </a>
           </li>
@@ -91,7 +98,7 @@
 
         <li class="nav-item">
           <a href="./email.jsp" class="nav-link">
-            <i class="nav-icon fas fa-edit"></i>
+            <i class="nav-icon far fa-envelope"></i>
             <p>Email</p>
           </a>
         </li>

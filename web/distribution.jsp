@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card mt-5">
-        <div class="card-header"><h2>Register doses received</h2></div>
+        <div class="card-header"><h2>Available Doses</h2></div>
         <div class="card-body">
           <c:if test="${sessionScope.dozes.length()>0}">
             <vaccine:insert table="dozes" values="${sessionScope.dozes}"/>
@@ -14,6 +14,7 @@
               Saved ${requestScope.insertResp} records.
             </c:if>
           </c:if>
+          <vaccine:select table="dozes" displayFormat="table" where="distributed=0"/>
           <c:set scope="page" var="dozes" value="${requestScope.data}"/>
           <div hidden>
             <vaccine:select table="vaccine" displayFormat="table"/>
@@ -24,45 +25,7 @@
               </c:forEach>
             </c:if>
           </div>
-
-          <form action="vaccine" method="post">
-            <input type="hidden" name="reqType" value="regReceivedVaccine"/>
-            <table class="table table-bordered table-hover">
-              <thead>
-              <tr>
-                <th>Name of Vaccine</th>
-                <th>Quantity</th>
-                <th>Batch Number</th>
-                <th>Arrival Date</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td><select name="vaccine" class="form-control"><c:out value="${pageScope.options}" escapeXml="false"/></select></td>
-                <td><input type="number" name="quantity" class="form-control" placeholder="0"></td>
-                <td><input type="text" name="batchNo" class="form-control" placeholder="Enter batch number"></td>
-                <td><input type="date" name="date" class="form-control"></td>
-              </tr>
-              <tr>
-                <td><select name="vaccine" class="form-control"><c:out value="${pageScope.options}" escapeXml="false"/></select></td>
-                <td><input type="number" name="quantity" class="form-control" placeholder="0"></td>
-                <td><input type="text" name="batchNo" class="form-control" placeholder="Enter batch number"></td>
-                <td><input type="date" name="date" class="form-control"></td>
-              </tr>
-              <tr>
-                <td><select name="vaccine" class="form-control"><c:out value="${pageScope.options}" escapeXml="false"/></select></td>
-                <td><input type="number" name="quantity" class="form-control" placeholder="0"></td>
-                <td><input type="text" name="batchNo" class="form-control" placeholder="Enter batch number"></td>
-                <td><input type="date" name="date" class="form-control"></td>
-              </tr>
-              </tbody>
-            </table>
-            <div class="form-group row mb-0">
-              <div class="col-md-6">
-                <button type="submit" class="btn btn-primary">Add</button>
-              </div>
-            </div>
-          </form>
+          
           <div hidden>
             <c:if test="${sessionScope.reqType.equals('distribute')}">
               <vaccine:select table="health_centre" displayFormat="table"/>
@@ -101,6 +64,10 @@
 <%--              </c:if>--%>
             </c:if>
           </div><br/>
+          <form action="vaccine" method="post">
+            <input type="hidden" name="reqType" value="distribute"/>
+            <button type="submit" class="btn btn-primary">Distribute doses</button>
+          </form>
         </div><!-- card-body -->
       </div><!-- card -->
     </div><!-- column -->

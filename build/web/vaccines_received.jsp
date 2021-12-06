@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card mt-5">
-        <div class="card-header"><h2>Doses</h2></div>
+        <div class="card-header"><h2>Register doses received</h2></div>
         <div class="card-body">
           <c:if test="${sessionScope.dozes.length()>0}">
             <vaccine:insert table="dozes" values="${sessionScope.dozes}"/>
@@ -14,7 +14,6 @@
               Saved ${requestScope.insertResp} records.
             </c:if>
           </c:if>
-          <vaccine:select table="dozes" displayFormat="table" where="distributed=0"/>
           <c:set scope="page" var="dozes" value="${requestScope.data}"/>
           <div hidden>
             <vaccine:select table="vaccine" displayFormat="table"/>
@@ -102,10 +101,6 @@
 <%--              </c:if>--%>
             </c:if>
           </div><br/>
-          <form action="vaccine" method="post">
-            <input type="hidden" name="reqType" value="distribute"/>
-            <button type="submit" class="btn btn-primary">Distribute vaccines</button>
-          </form>
         </div><!-- card-body -->
       </div><!-- card -->
     </div><!-- column -->
