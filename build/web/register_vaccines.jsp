@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card mt-5">
-          <div class="card-header"><h2>Register Vaccine</h2></div>
+          <div class="card-header"><h2>Vaccines</h2></div>
           <div class="card-body">
             <c:if test="${sessionScope.vaccines.length()>0}">
               <vaccine:insert table="vaccine" values="${sessionScope.vaccines}"/>
@@ -44,7 +44,7 @@
                 </tbody>
               </table>
               <div class="form-group row mb-0">
-                <div class="col-md-6 offset-md-4">
+                <div class="col-md-6">
                   <button type="submit" class="btn btn-primary">Register</button>
                 </div>
               </div>

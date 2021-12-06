@@ -14,15 +14,19 @@
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="public/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="public/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="public/dist/css/adminlte.min.css"><!-- Julaw favicon -->
+    <link rel="icon" href="public/dist/img/coronavirus.svg" type="image/x-icon" style="border-radius: 15px">
     <style>
         .form-control-custom{
             display: inline;
             width: auto;
             margin-right: 5px;
         }
+        thead{
+            border-top: 1px solid #dee2e6;
+        }
     </style>
-    <title>Home</title>
+    <title>Covid Vaccine Tracker</title>
   </head>
   <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div hidden>
@@ -34,15 +38,19 @@
         </c:when>
         <c:when test="${sessionScope.auth.equals('login')}">
           <c:if test="${sessionScope.userType.equals('patient')}">
-            <auth:select table="name from patient" displayFormat="table" where="email='${sessionScope.email}' and password='${sessionScope.password}'"/>
+            <auth:select table="id, name from patient" displayFormat="table" where="email='${sessionScope.email}' and password='${sessionScope.password}'"/>
             <c:if test="${requestScope.data.size()>0}">
               <c:set var="username" scope="session" value="${requestScope.data.get(0).get('name')}"/>
+              <c:set var="patientId" scope="session" value="${requestScope.data.get(0).get('id')}"/>
             </c:if>
           </c:if>
         </c:when>
       </c:choose>
       <c:if test="${sessionScope.auth.length()==0||sessionScope.auth==null||sessionScope.username.length()==0||sessionScope.username==null}">
-        <% response.sendRedirect(request.getContextPath() + "/login.jsp"); %>
+        <%
+          request.setAttribute("error","Invalid password or email!");
+          request.getRequestDispatcher("login.jsp").forward(request, response);
+        %>
       </c:if>
     </div>
     <div class="wrapper">

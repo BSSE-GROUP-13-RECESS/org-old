@@ -2,6 +2,9 @@
 <c:if test="${sessionScope.userType.equals('patient')}">
   <% response.sendRedirect(request.getContextPath() + "/booking.jsp");%>
 </c:if>
+<c:if test="${sessionScope.userType.equals('centreAdmin')}">
+  <% response.sendRedirect(request.getContextPath() + "/vaccinated_patients.jsp");%>
+</c:if>
   <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">

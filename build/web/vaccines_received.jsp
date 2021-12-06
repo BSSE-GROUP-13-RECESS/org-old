@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card mt-5">
-        <div class="card-header"><h2>Register Vaccine</h2></div>
+        <div class="card-header"><h2>Doses</h2></div>
         <div class="card-body">
           <c:if test="${sessionScope.dozes.length()>0}">
             <vaccine:insert table="dozes" values="${sessionScope.dozes}"/>
@@ -59,7 +59,7 @@
               </tbody>
             </table>
             <div class="form-group row mb-0">
-              <div class="col-md-6 offset-md-4">
+              <div class="col-md-6">
                 <button type="submit" class="btn btn-primary">Add</button>
               </div>
             </div>
@@ -77,12 +77,18 @@
                   <vaccine:select table="sum(number) as sum from visited_patients" displayFormat="table" where=" date like '${LocalDate.now().minusMonths(1).toString().substring(0,7)}%'"/>
                   <c:set var="totalPatients" scope="page" value="${requestScope.data.get(0).get('sum')}"/>
                   <c:set var="doze_query" scope="page" value="(doze_id,centre_id,quantity) values "/>
-                  <c:forEach var="i" begin="0" end="${pageScope.dozes.size()-1}">
-                    <c:forEach var="x" begin="0" end="${pageScope.visitPatients.size()-1}">
-                      <c:set var="doze_query" scope="page" value="${pageScope.doze_query} ('${pageScope.dozes.get(i).get('id')}','${pageScope.visitPatients.get(x).get('centre_id')}','${Math.round(pageScope.visitPatients.get(x).get('number')*pageScope.dozes.get(i).get('quantity')/pageScope.totalPatients)}'),"/>
+                  <c:if test="${pageScope.dozes.size()>0}">
+                    <c:forEach var="i" begin="0" end="${pageScope.dozes.size()-1}">
+                      <c:forEach var="x" begin="0" end="${pageScope.visitPatients.size()-1}">
+                        <c:set var="doze_query" scope="page" value="${pageScope.doze_query} ('${pageScope.dozes.get(i).get('id')}','${pageScope.visitPatients.get(x).get('centre_id')}','${Math.round(pageScope.visitPatients.get(x).get('number')*pageScope.dozes.get(i).get('quantity')/pageScope.totalPatients)}'),"/>
+                      </c:forEach>
                     </c:forEach>
-                  </c:forEach>
-                  <vaccine:insert table="centre_dozes" values="${pageScope.doze_query.substring(0,pageScope.doze_query.length()-1)};"/>
+                    <vaccine:insert table="centre_dozes" values="${pageScope.doze_query.substring(0,pageScope.doze_query.length()-1)};"/>
+                    <vaccine:update table="dozes" where="distributed=0" newValue="distributed=1"/>
+                  </c:if>
+                </c:when>
+                <c:when test="">
+
                 </c:when>
               </c:choose>
 <%--              <c:if test="${requestScope.data.size()>0}">--%>
@@ -95,8 +101,8 @@
 <%--                </c:if>--%>
 <%--              </c:if>--%>
             </c:if>
-          </div>
-          <form action="register_vaccines.jsp" method="post">
+          </div><br/>
+          <form action="vaccine" method="post">
             <input type="hidden" name="reqType" value="distribute"/>
             <button type="submit" class="btn btn-primary">Distribute vaccines</button>
           </form>
