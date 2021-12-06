@@ -7,19 +7,23 @@
         <div class="card mt-5">
           <div class="card-header"><h2>Update Health Centers</h2></div>
           <div class="card-body">
+            <div>
+              <p hidden>
+                <c:if test="${sessionScope.len>0}">
+                  <c:forEach var="i" begin="0" end="${sessionScope.len-1}">
+                    <health:update table="health_centre" newValue="${sessionScope.query[i]}" where="${sessionScope.where[i]}"/>
+                  </c:forEach>
+                </c:if>
+              </p>
+              <p class="bg-success text-danger">
+                <c:if test="${requestScope.updateResp>0}">
+                  Updated ${sessionScope.len} records.
+                  <c:set var="len" scope="session" value="0"/>
+                </c:if>
+              </p>
+            </div>
             <form action="health" method="post">
-              <div class="form-group row">
-                <div hidden></div>
-                <p class="bg-success text-danger">
-                  <c:if test="${sessionScope.data.length()>0}">
-                    <health:update table="health_centre" values="${sessionScope.data}"/>
-                    <c:set var="data" scope="session" value=""/>
-                    <c:if test="${requestScope.insertResp>0}">
-                      Saved ${requestScope.insertResp} records.
-                    </c:if>
-                  </c:if>
-                </p>
-              </div>
+              <input type="hidden" name="reqType" value="updateCenters">
               <div hidden><health:select table="health_centre" displayFormat="table"/></div>
               <table class="table table-bordered table-hover">
                 <tbody>

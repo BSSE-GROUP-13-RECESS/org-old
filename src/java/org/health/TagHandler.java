@@ -47,7 +47,7 @@ public class TagHandler extends SimpleTagSupport {
             request.setAttribute("insertResp",exec);
             connection.close();
         } catch (SQLException e) {
-            request.setAttribute("insertResp",-1);
+            out.println(e.getMessage());
         }
     }
 
@@ -85,7 +85,7 @@ public class TagHandler extends SimpleTagSupport {
             else{
                 output = "<table class='table table-bordered table-hover table-responsive' style='border-right:0; border-bottom:0; border-top:0;'><thead><tr>";
                 for(int i=1; i<=colLength; i++){
-                    output+="<th>"+resultSetMetaData.getColumnName(i)+"</th>";
+                    output+="<th>"+resultSetMetaData.getColumnName(i).toUpperCase()+"</th>";
                 }
                 output+="</tr></thead><tbody>";
 
@@ -112,10 +112,11 @@ public class TagHandler extends SimpleTagSupport {
     //update
     public void update() throws IOException {
         JspWriter out = getJspContext().getOut();
+        HttpServletRequest request = (HttpServletRequest) ((PageContext)getJspContext()).getRequest();
         try {
             Connection connection = connection();
             int exec = connection.createStatement().executeUpdate("update "+table+" set "+newValue+" where "+where+" ;");
-            out.println(exec);
+            request.setAttribute("updateResp",exec);
             connection.close();
         } catch (SQLException e) {
             out.println(e.getMessage());
