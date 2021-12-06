@@ -96,12 +96,14 @@
           </li>
         </c:if>
 
-        <li class="nav-item">
-          <a href="./email.jsp" class="nav-link">
-            <i class="nav-icon far fa-envelope"></i>
-            <p>Email</p>
-          </a>
-        </li>
+        <c:if test="${!sessionScope.userType.equals('admin')}">
+          <li class="nav-item">
+            <a href="./email.jsp" class="nav-link">
+              <i class="nav-icon far fa-envelope"></i>
+              <p>Email</p>
+            </a>
+          </li>
+        </c:if>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

@@ -1,5 +1,6 @@
 <%@ include file="upper.jsp" %>
 <%@taglib uri="https://org.com" prefix="email"%>
+<c:if test="${!sessionScope.userType.equals('admin')}">
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -12,4 +13,5 @@
     </div><!-- column -->
   </div><!-- raw -->
 </div><!-- container -->
+</c:if>
 <%@ include file="lower.jsp" %>

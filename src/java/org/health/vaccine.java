@@ -42,7 +42,7 @@ public class vaccine extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("reqType", reqType);
                 session.setAttribute("vaccines", query.substring(0, query.length() - 1) + ";");
-                response.sendRedirect(request.getContextPath() + "/register_vaccines.jsp");
+                response.sendRedirect(request.getContextPath() + "/vaccines.jsp");
                 break;
             }
             case "regReceivedVaccine": {
@@ -61,13 +61,13 @@ public class vaccine extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("reqType", reqType);
                 session.setAttribute("dozes", query.substring(0, query.length() - 1) + ";");
-                response.sendRedirect(request.getContextPath() + "/vaccines_received.jsp");
+                response.sendRedirect(request.getContextPath() + "/distribution.jsp");
                 break;
             }
             case "distribute": {
                 HttpSession session = request.getSession();
                 session.setAttribute("reqType", reqType);
-                response.sendRedirect(request.getContextPath() + "/vaccines_received.jsp");
+                response.sendRedirect(request.getContextPath() + "/distribution.jsp");
                 break;
             }
         }
