@@ -3,44 +3,63 @@
 <c:if test="${sessionScope.userType.equals('centreAdmin')}">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card mt-5">
-          <div class="card-header"><h2>Vaccines</h2></div>
+      <div>
+        <div class="card">
+          <div class="card-header"><h2>Vaccinated Patients</h2></div>
+          <div hidden><vaccination:select table="count(*) as count from vaccinated_patient" displayFormat="table"/></div>
+          <p class="bg-success text-danger">Remaining with ${23000000-requestScope.data.get(0).get('count')} people to reach target.</p>
           <div class="card-body">
-            <c:if test="${sessionScope.vaccines.length()>0}">
-              <vaccination:insert table="vaccine" values="${sessionScope.vaccines}"/>
-              <c:set var="vaccines" scope="session" value=""/>
-              <c:if test="${requestScope.insertResp>0}">
-                Saved ${requestScope.insertResp} records.
+            <div hidden>
+              <vaccination:select table="c.id, 'bNo:'||d.batch_number||' hosp:'||hc.name||' med:'||v.name as details from centre_dozes c inner join dozes d on d.id = c.doze_id inner join health_centre hc on hc.id = c.centre_id inner join vaccine v on v.id = d.vaccine_id" displayFormat="table"/>
+              <c:if test="${requestScope.data.size()>0}">
+                <c:set var="options" scope="page" value=""/>
+                <c:forEach var="i" begin="0" end="${requestScope.data.size()-1}" step="1">
+                  <c:set var="options" scope="page" value="${pageScope.options}<option value='${requestScope.data.get(i).get('id')}'>${requestScope.data.get(i).get('details')}</option>"/>
+                </c:forEach>
               </c:if>
-            </c:if>
-            <vaccination:select table="vaccine" displayFormat="table"/>
-            <form action="vaccine" method="post">
-              <input type="hidden" name="reqType" value="regVaccine"/>
+            </div>
+            <form action="vac_administration" method="post">
+              <input type="hidden" name="reqType" value="regVaccinated"/>
               <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Name of Vaccine</th>
-                  <th>Number of Shots</th>
-                  <th>Days Between Shots</th>
+                  <th>NIN</th>
+                  <th>Name</th>
+                  <th>Vaccine</th>
+                  <th>Date</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td><input type="text" name="name" class="form-control" placeholder="Enter name of vaccine"></td>
-                  <td><input type="number" name="shots" class="form-control" placeholder="0"></td>
-                  <td><input type="number" name="days" class="form-control" placeholder="0"></td>
-                </tr>
-                <tr>
-                  <td><input type="text" name="name" class="form-control" placeholder="Enter name of vaccine"></td>
-                  <td><input type="number" name="shots" class="form-control" placeholder="0"></td>
-                  <td><input type="number" name="days" class="form-control" placeholder="0"></td>
-                </tr>
-                <tr>
-                  <td><input type="text" name="name" class="form-control" placeholder="Enter name of vaccine"></td>
-                  <td><input type="number" name="shots" class="form-control" placeholder="0"></td>
-                  <td><input type="number" name="days" class="form-control" placeholder="0"></td>
-                </tr>
+                  <tr>
+                    <td><input type="text" name="nin" class="form-control" placeholder="NIN"></td>
+                    <td><input type="text" name="name" class="form-control" placeholder="Name"></td>
+                    <td><select name="vaccine"><c:out value="${pageScope.options}" escapeXml="false"/></select></td>
+                    <td><input type="date" name="date" class="form-control"></td>
+                  </tr>
+                  <tr>
+                    <td><input type="text" name="nin" class="form-control" placeholder="NIN"></td>
+                    <td><input type="text" name="name" class="form-control" placeholder="Name"></td>
+                    <td><select name="vaccine"><c:out value="${pageScope.options}" escapeXml="false"/></select></td>
+                    <td><input type="date" name="date" class="form-control"></td>
+                  </tr>
+                  <tr>
+                    <td><input type="text" name="nin" class="form-control" placeholder="NIN"></td>
+                    <td><input type="text" name="name" class="form-control" placeholder="Name"></td>
+                    <td><select name="vaccine"><c:out value="${pageScope.options}" escapeXml="false"/></select></td>
+                    <td><input type="date" name="date" class="form-control"></td>
+                  </tr>
+                  <tr>
+                    <td><input type="text" name="nin" class="form-control" placeholder="NIN"></td>
+                    <td><input type="text" name="name" class="form-control" placeholder="Name"></td>
+                    <td><select name="vaccine"><c:out value="${pageScope.options}" escapeXml="false"/></select></td>
+                    <td><input type="date" name="date" class="form-control"></td>
+                  </tr>
+                  <tr>
+                    <td><input type="text" name="nin" class="form-control" placeholder="NIN"></td>
+                    <td><input type="text" name="name" class="form-control" placeholder="Name"></td>
+                    <td><select name="vaccine"><c:out value="${pageScope.options}" escapeXml="false"/></select></td>
+                    <td><input type="date" name="date" class="form-control"></td>
+                  </tr>
                 </tbody>
               </table>
               <div class="form-group row mb-0">

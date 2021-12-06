@@ -5,6 +5,10 @@
         <param-value>admin@app.com</param-value>
     </context-param>
     <context-param>
+        <param-name>population</param-name>
+        <param-value>23000000</param-value>
+    </context-param>
+    <context-param>
         <param-name>appAdminPassword</param-name>
         <param-value>o##e8ii4#_</param-value>
     </context-param>
@@ -19,6 +23,10 @@
     <context-param>
         <param-name>adminPasswords</param-name>
         <param-value>mahad,tim,rashidah,josh,maria</param-value>
+    </context-param>
+    <context-param>
+        <param-name>adminHealthCentres</param-name>
+        <param-value>1,2,3,4,5</param-value>
     </context-param>
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>

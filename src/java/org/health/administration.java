@@ -10,12 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class administration extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         String auth = request.getParameter("auth");
@@ -53,6 +48,7 @@ public class administration extends HttpServlet {
                 String[] names = context.getInitParameter("adminNames").split(",");
                 String[] emails = context.getInitParameter("adminEmails").split(",");
                 String[] passwords = context.getInitParameter("adminPasswords").split(",");
+                String[] centres = context.getInitParameter("adminHealthCentres").split(",");
                 String adminEmail =  context.getInitParameter("appAdminEmail");
                 String adminPassword = context.getInitParameter("appAdminPassword");
 

@@ -5,11 +5,40 @@
     <title>Title</title>
 </head>
 <body>
-    <ul style="list-style-type: none;">
-        <li style="display: inline;">tim</li>
-        <li style="display: inline;">tim</li>
-    </ul>
-    <input type="time">
-    <input type="date">
+
+    <div id='printableArea'>
+        <table class='table table-bordered table-hover'>
+            <thead>
+                <tr>
+                    <td>NIN</td>
+                    <td>Name</td>
+                    <td>Health Centre</td>
+                    <td>date</td>
+                    <td>batchNo</td>
+                    <td>Vaccine</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>NIN</td>
+                    <td>Name</td>
+                    <td>Health Centre</td>
+                    <td>date</td>
+                    <td>batchNo</td>
+                    <td>Vaccine</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type='button' onclick="printDiv('printableArea')" value='print certificate' />
+    <script>
+        function printDiv(divName) {
+            let printContents = document.getElementById(divName).innerHTML;
+            let originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script>
 </body>
 </html>
