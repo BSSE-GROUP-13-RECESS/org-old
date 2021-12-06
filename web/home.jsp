@@ -3,7 +3,7 @@
   <% response.sendRedirect(request.getContextPath() + "/booking.jsp");%>
 </c:if>
 <c:if test="${sessionScope.userType.equals('centreAdmin')}">
-  <% response.sendRedirect(request.getContextPath() + "/email.jsp");%>
+  <% response.sendRedirect(request.getContextPath() + "/vaccinated_patients.jsp");%>
 </c:if>
   <div class="content-header">
     <div class="container-fluid">

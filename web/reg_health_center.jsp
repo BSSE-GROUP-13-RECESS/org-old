@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card mt-5">
-          <div class="card-header"><h2>Health Centers</h2></div>
+          <div class="card-header"><h2>View & Register Health Centers</h2></div>
           <div class="card-body">
             <reg:select table="health_centre" displayFormat="table"/>
             <form action="health" method="post">

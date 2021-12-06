@@ -40,7 +40,14 @@
           <li class="nav-item">
             <a href="./reg_health_center.jsp" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
-              <p>Health Centers</p>
+              <p>Register Health Centers</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="./update_health_center.jsp" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>Update Health Centers</p>
             </a>
           </li>
 
