@@ -10,7 +10,7 @@
           <p class="bg-success text-danger">Remaining with ${23000000-requestScope.data.get(0).get('count')} people to reach target.</p>
           <div class="card-body">
             <div hidden>
-              <vaccination:select table="c.id, 'bNo:'||d.batch_number||' hosp:'||hc.name||' med:'||v.name as details from centre_dozes c inner join dozes d on d.id = c.doze_id inner join health_centre hc on hc.id = c.centre_id inner join vaccine v on v.id = d.vaccine_id" displayFormat="table"/>
+              <vaccination:select table="c.id, 'bNo:'||d.batch_number||' hosp:'||hc.name||' med:'||v.name as details from centre_dozes c inner join dozes d on d.id = c.doze_id inner join health_centre hc on hc.id = c.centre_id inner join vaccine v on v.id = d.vaccine_id" where="hc.id=${sessionScope.adminId}" displayFormat="table"/>
               <c:if test="${requestScope.data.size()>0}">
                 <c:set var="options" scope="page" value=""/>
                 <c:forEach var="i" begin="0" end="${requestScope.data.size()-1}" step="1">

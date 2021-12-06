@@ -14,7 +14,8 @@
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="public/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="public/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="public/dist/css/adminlte.min.css"><!-- Julaw favicon -->
+    <link rel="icon" href="public/dist/img/coronavirus.svg" type="image/x-icon" style="border-radius: 15px">
     <style>
         .form-control-custom{
             display: inline;
@@ -25,7 +26,7 @@
             border-top: 1px solid #dee2e6;
         }
     </style>
-    <title>Home</title>
+    <title>Covid Vaccine Tracker</title>
   </head>
   <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div hidden>

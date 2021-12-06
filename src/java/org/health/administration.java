@@ -62,6 +62,7 @@ public class administration extends HttpServlet {
                             if (passwords[i].equals(password)) {
                                 userType = "centreAdmin";
                                 session.setAttribute("username", names[i]);
+                                session.setAttribute("adminId",centres[i]);
                             } else {
                                 request.setAttribute("email", email);
                                 request.setAttribute("error", "Invalid password or email!");
