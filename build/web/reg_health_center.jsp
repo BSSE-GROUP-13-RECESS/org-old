@@ -8,17 +8,7 @@
           <div class="card-header"><h2>Register Health Centers</h2></div>
           <div class="card-body">
             <form action="health" method="post">
-              <div class="form-group row">
-                <p class="bg-success text-danger">
-                  <c:if test="${sessionScope.data.length()>0}">
-                    <reg:insert table="health_centre" values="${sessionScope.data}"/>
-                    <c:set var="data" scope="session" value=""/>
-                    <c:if test="${requestScope.insertResp>0}">
-                      Saved ${requestScope.insertResp} records.
-                    </c:if>
-                  </c:if>
-                </p>
-              </div>
+              <input type="hidden" name="reqType" value="regCenters">
               <table class="table table-bordered table-hover">
                 <tbody>
                   <tr>

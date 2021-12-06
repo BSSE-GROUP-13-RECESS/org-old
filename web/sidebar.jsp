@@ -89,6 +89,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="./patient_visits.jsp" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>Patient Register</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="./centre_report.jsp" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>Reports</p>

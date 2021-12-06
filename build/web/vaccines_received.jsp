@@ -7,13 +7,6 @@
       <div class="card mt-5">
         <div class="card-header"><h2>Register doses received</h2></div>
         <div class="card-body">
-          <c:if test="${sessionScope.dozes.length()>0}">
-            <vaccine:insert table="dozes" values="${sessionScope.dozes}"/>
-            <c:set var="dozes" scope="session" value=""/>
-            <c:if test="${requestScope.insertResp>0}">
-              Saved ${requestScope.insertResp} records.
-            </c:if>
-          </c:if>
           <c:set scope="page" var="dozes" value="${requestScope.data}"/>
           <div hidden>
             <vaccine:select table="vaccine" displayFormat="table"/>
