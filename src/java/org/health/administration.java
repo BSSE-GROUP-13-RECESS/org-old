@@ -55,6 +55,8 @@ public class administration extends HttpServlet {
                 if(email.equals(adminEmail)&&password.equals(adminPassword)){
                     userType = "admin";
                     session.setAttribute("username", "Admin");
+                    session.setAttribute("adminEmails",emails);
+                    session.setAttribute("adminNames", names);
                 }
                 else {
                     for (int i = 0; i < emails.length; i++) {
@@ -63,6 +65,7 @@ public class administration extends HttpServlet {
                                 userType = "centreAdmin";
                                 session.setAttribute("username", names[i]);
                                 session.setAttribute("adminId",centres[i]);
+                                session.setAttribute("checkBooking","true");
                             } else {
                                 request.setAttribute("email", email);
                                 request.setAttribute("error", "Invalid password or email!");

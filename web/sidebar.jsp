@@ -4,7 +4,15 @@
   <a href="#" class="brand-link">
     <img src="public/dist/img/coronavirus.svg" alt="Covid" class="brand-image img-circle elevation-3"
          style="opacity: .8">
-    <span class="brand-text font-weight-light">Vaccine Tracker</span>
+    <c:choose>
+      <c:when test="${sessionScope.userType.equals('centreAdmin')}">
+        <div hidden><auth:select table="health_centre" where="id=${sessionScope.adminId}" displayFormat="table"/></div>
+        <span class="brand-text font-weight-light">${requestScope.data.get(0).get('name')}</span>
+      </c:when>
+      <c:otherwise>
+        <span class="brand-text font-weight-light">Vaccine Tracker</span>
+      </c:otherwise>
+    </c:choose>
   </a>
 
   <!-- Sidebar -->
@@ -30,13 +38,6 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <c:if test="${sessionScope.userType.equals('admin')}">
-          <li class="nav-item">
-            <a href="./home.jsp" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-
           <li class="nav-item">
             <a href="./reg_health_center.jsp" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>

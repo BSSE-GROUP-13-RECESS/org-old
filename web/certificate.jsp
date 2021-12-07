@@ -75,7 +75,14 @@
                         <c:if test="${requestScope.data.size()>0}">
                           <c:forEach var="i" begin="0" end="${requestScope.data.size()-1}" step="1">
                             <c:if test="${requestScope.data.get(i).get('id').equals(sessionScope.vaccine[x])}">
-                              <c:out value="${LocalDate.of(sessionScope.date[x].substring(0,4),sessionScope.date[x].substring(5,7),sessionScope.date[x].substring(8)).plusDays(requestScope.data.get(i).get('next_doze_time'))}"/>
+                              <c:choose>
+                                <c:when test="${requestScope.data.get(i).get('next_doze_time')>0}">
+                                  <c:out value="${LocalDate.of(sessionScope.date[x].substring(0,4),sessionScope.date[x].substring(5,7),sessionScope.date[x].substring(8)).plusDays(requestScope.data.get(i).get('next_doze_time'))}"/>
+                                </c:when>
+                                <c:otherwise>
+                                  <c:out value="-------"/>
+                                </c:otherwise>
+                              </c:choose>
                             </c:if>
                           </c:forEach>
                         </c:if>

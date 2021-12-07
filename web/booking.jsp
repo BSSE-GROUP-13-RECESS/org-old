@@ -20,42 +20,11 @@
                   <h3>Health Center Data</h3>
               </div><!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <th>Health Center</th>
-                      <th>Patients Queued</th>
-                      <th>Available Doses</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td> 
-                    </tr>
-                  </tbody>
-                </table>
+                <h4>Queues</h4>
+                <booking:select table="hc.name as centre, count(b.id) as queues from booking b inner join health_centre hc on hc.id = b.centre_id group by hc.name" displayFormat="table"/>
+
+                <h4>Available Doses</h4>
+                <booking:select table="hc.name as centre, v.name as vaccine, vi.number as quantity from vaccine_inventory vi inner join health_centre hc on hc.id = vi.center_id inner join vaccine v on v.id = vi.vaccine_id order by hc.name" displayFormat="table"/>
               </div><!-- /.card-body -->
             </div><!-- /.card -->
           </div><!-- /.col -->
@@ -70,10 +39,10 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                  <h3>Place Booking</h3>
+                  <h3>View & Place Booking</h3>
               </div><!-- /.card-header -->
               <div class="card-body">
-                <booking:select table="booking" displayFormat="table" where="patient_id=${sessionScope.patientId}"/>
+                <booking:select table="hc.name as centre, b.date, b.time from booking b inner join health_centre hc on hc.id = b.centre_id" displayFormat="table" where="patient_id=${sessionScope.patientId}"/>
                 <div hidden>
                   <c:if test="${sessionScope.bookQuery.length()>0}">
                     <booking:insert table="booking" values="${sessionScope.bookQuery}"/>

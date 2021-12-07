@@ -35,6 +35,22 @@ public class health extends HttpServlet {
             session.setAttribute("where",where);
             response.sendRedirect(request.getContextPath() + "/update_health_center.jsp");
         }
+        else if(reqType.equals("regPatient")){
+            HttpSession session = request.getSession();
+            String[] patients = request.getParameterValues("name");
+            String[] date = request.getParameterValues("date");
+            String id = (String) session.getAttribute("adminId");
+            String query = "(centre_id, name, date) values ";
+
+            for (int i = 0; i <patients.length; i++) {
+                if (patients[i].length()>0&&date[i].length()>0) {
+                    query += "('"+id+"','"+patients[i]+"','"+date[i]+"'),";
+                }
+            }
+
+            session.setAttribute("query", query.substring(0, query.length() - 1) + ";");
+            response.sendRedirect(request.getContextPath() + "/patient_visits.jsp");
+        }
         else {
             String[] health_centers = request.getParameterValues("name");
             String[] center_id = request.getParameterValues("center_id");

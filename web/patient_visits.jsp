@@ -1,30 +1,25 @@
-<%-- 
-    Document   : patient_visits
-    Created on : Dec 6, 2021, 3:12:14 PM
-    Author     : hp
---%>
-
 <%@ include file="upper.jsp" %>
-<%@taglib uri="https://org.com" prefix="vaccination"%>
+<%@taglib uri="https://org.com" prefix="visits"%>
 <c:if test="${sessionScope.userType.equals('centreAdmin')}">
   <div class="container">
     <div class="row justify-content-center">
       <div>
         <div class="card">
           <div class="card-header"><h2>Patient Register</h2></div>
-          <div hidden><vaccination:select table="count(*) as count from vaccinated_patient" displayFormat="table"/></div>
           <div class="card-body">
             <div hidden>
-              <vaccination:select table="c.id, 'bNo:'||d.batch_number||' hosp:'||hc.name||' med:'||v.name as details from centre_dozes c inner join dozes d on d.id = c.doze_id inner join health_centre hc on hc.id = c.centre_id inner join vaccine v on v.id = d.vaccine_id" where="hc.id=${sessionScope.adminId}" displayFormat="table"/>
-              <c:if test="${requestScope.data.size()>0}">
-                <c:set var="options" scope="page" value=""/>
-                <c:forEach var="i" begin="0" end="${requestScope.data.size()-1}" step="1">
-                  <c:set var="options" scope="page" value="${pageScope.options}<option value='${requestScope.data.get(i).get('id')}'>${requestScope.data.get(i).get('details')}</option>"/>
-                </c:forEach>
+              <c:if test="${sessionScope.query.length()>0}">
+                <visits:insert table="visited_patients" values="${sessionScope.query}"/>
+                <c:set var="query" scope="session" value=""/>
               </c:if>
             </div>
-            <form action="vac_administration" method="post">
-              <input type="hidden" name="reqType" value="regVaccinated"/>
+            <p class="bg-success text-danger">
+              <c:if test="${requestScope.insertResp>0}">
+                Saved ${requestScope.insertResp} records.
+              </c:if>
+            </p>
+            <form action="health" method="post">
+              <input type="hidden" name="reqType" value="regPatient"/>
               <table class="table table-bordered table-hover">
                 <thead>
                 <tr>

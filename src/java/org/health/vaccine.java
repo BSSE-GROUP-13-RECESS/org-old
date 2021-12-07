@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class vaccine extends HttpServlet {
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String reqType = request.getParameter("reqType");
         if(reqType.equals("getVaccine")){
@@ -67,7 +66,7 @@ public class vaccine extends HttpServlet {
             case "distribute": {
                 HttpSession session = request.getSession();
                 session.setAttribute("reqType", reqType);
-                response.sendRedirect(request.getContextPath() + "/distribution.jsp");
+                response.sendRedirect(request.getContextPath() + "/inventory.jsp");
                 break;
             }
         }

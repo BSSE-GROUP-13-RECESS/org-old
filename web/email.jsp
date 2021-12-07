@@ -5,9 +5,10 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card mt-5">
-        <div class="card-header"><h2>Email</h2></div>
+        <div hidden><email:select table="count(*) as count from email" where="email='${sessionScope.email}' and ready=1" displayFormat="table"/></div>
+        <div class="card-header"><h2>Email<span class="badge badge-primary badge-pill">${requestScope.data.get(0).get('count')}</span></h2></div>
         <div class="card-body">
-            <email:select table="message from email" where="email='${sessionScope.email}'" displayFormat="table"/>
+            <email:select table="sender, sender_email, date_time as 'date & time', subject, message from email" where="email='${sessionScope.email}' and ready=1" displayFormat="list"/>
         </div><!-- card-body -->
       </div><!-- card -->
     </div><!-- column -->
