@@ -1,1 +1,1 @@
-We used jakarta and tom cat
+A covid vaccine tracker application to manage vaccination information in the country.
