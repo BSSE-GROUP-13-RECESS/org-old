@@ -1,2 +1,1 @@
-use sqlite database by calling method
-``initSqliteDb``
+We used jakarta
